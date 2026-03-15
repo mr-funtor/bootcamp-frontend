@@ -157,7 +157,7 @@ export default function Profile() {
 
           <div className="bg-lightGray p-5 rounded-xl w-full">
             <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-6">
-              <p className="text-gray-700 font-medium">Profile picture</p>
+              <p className="text-gray-700 font-medium">Profile picture with smile</p>
               <div className="relative group">
                 <div
                   className="relative bg-lightPurple flex flex-col gap-1 items-center justify-center size-48.25 rounded-xl overflow-hidden transition-all duration-200 hover:bg-opacity-80"
