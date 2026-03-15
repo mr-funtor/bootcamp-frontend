@@ -81,7 +81,37 @@ jobs:
           tags: ${{ steps.tag.outputs.tags }}
           build-args: |
             NEXT_PUBLIC_API_URL=${{ env.NEXT_PUBLIC_API_URL }}
+      
+      - name: Install Trivy Security Scanner
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
+
+      - name: Scan Docker Image for Vulnerabilities
+        run: |
+          trivy image --format table --output trivy-report.txt ${{ steps.tag.outputs.tags }}
+
+      - name: Upload Trivy Scan Report
+        if: always ()  # Ensure this step runs even if the scan fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-scan-report
+          path: trivy-report.txt
+
+      - name: Push Docker Image to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.tag.outputs.tags }}
+
+      - name: Send Slack Notification - Pipeline Completed
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: "✅ Docker Build, Scan and Push Pipeline Completed"
+          SLACK_MESSAGE: "✅ Docker Build, Scan and Push Pipeline has completed for commit `${{ github.sha }}` on branch `${{ github.ref_name }}`. Image tagged as `${{ steps.tag.outputs.tags }}`."
+          SLACK_COLOR: "#36a64f"
 # -------------------------------------------------
 # STEP 1: Checkout Repository
 # -------------------------------------------------

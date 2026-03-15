@@ -180,7 +180,7 @@ function LinkContent() {
         <div className="flex-1 overflow-y-auto px-5 py-6 sm:p-10">
           <div className="mb-6">
             <h2 className="text-2xl sm:text-[32px] text-primary font-bold">Customize your links</h2>
-            <p className="text-gray-600">Add/edit/remove links below and then share all your profiles with the world!</p>
+            <p className="text-gray-600">Add/edit/remove all links below and then share all your profiles with the world!</p>
           </div>
           <Button
             variant="outline"
