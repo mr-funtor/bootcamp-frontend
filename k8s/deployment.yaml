@@ -26,7 +26,7 @@ spec:
         # The tag below is updated by your GitHub Action (sed command)
         image: mrfuntor/devops-bootcamp-linker-frontend-main-backend:latest
         ports:
-        - containerPort: 80
+        - containerPort: 3000
         resources:
           limits:
             cpu: "500m"
@@ -36,13 +36,13 @@ spec:
             memory: "256Mi"
         livenessProbe:
           httpGet:
-            path: /index.html
-            port: 80
+            path: /
+            port: 3000
           initialDelaySeconds: 15
           periodSeconds: 20
         readinessProbe:
           httpGet:
-            path: /index.html
-            port: 80
+            path: /
+            port: 3000
           initialDelaySeconds: 5
           periodSeconds: 10
