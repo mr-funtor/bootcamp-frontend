@@ -5,10 +5,11 @@ metadata:
   namespace: linker-app
 spec:
   # type: ClusterIP # Internal only; the Ingress handles public access
-  type: LoadBalancer # Exposes service externally via MetalLB
+  type: NodePort # Exposes the service on a port of each node for external access
   selector:
     app: web-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
+      nodePort: 30080
