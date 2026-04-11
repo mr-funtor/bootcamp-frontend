@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: linker-app-service
+  namespace: linker-app
+spec:
+  # type: ClusterIP # Internal only; the Ingress handles public access
+  type: LoadBalancer # Exposes service externally via MetalLB
+  selector:
+    app: web-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
