@@ -4,12 +4,10 @@ metadata:
   name: linker-app-service
   namespace: linker-app
 spec:
-  # type: ClusterIP # Internal only; the Ingress handles public access
-  type: NodePort # Exposes the service on a port of each node for external access
+  type: ClusterIP # Internal only; the Ingress handles public access
   selector:
     app: web-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3001
-      nodePort: 30080

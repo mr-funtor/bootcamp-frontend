@@ -2,6 +2,9 @@ name: Deploy to Contabo
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - '.github/workflows/**'  # Ignore workflow file changes
+      - '**/*.md'  # Ignore documentation changes
 
 env:
   DOCKER_REPO: mrfuntor
@@ -38,7 +41,7 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tags }}
           build-args: |
-            NEXT_PUBLIC_API_URL=http://213.199.52.194/api
+            NEXT_PUBLIC_API_URL=http://charlesmonroe.online
           cache-from: type=gha
           cache-to: type=gha,mode=max
     outputs:
@@ -67,9 +70,7 @@ jobs:
 
       - name: Deploy to MicroK8s
         run: |
-          kubectl apply -f k8s/namespace.yaml
-          kubectl apply -f k8s/deployment.yaml
-          kubectl apply -f k8s/service.yaml
+          kubectl apply -f k8s/
 
       - name: Verify Deployment
         run: |
