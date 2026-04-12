@@ -38,7 +38,7 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tags }}
           build-args: |
-            NEXT_PUBLIC_API_URL=http://213.199.52.194:30020/api
+            NEXT_PUBLIC_API_URL=http://213.199.52.194/api
           cache-from: type=gha
           cache-to: type=gha,mode=max
     outputs:
