@@ -2,9 +2,6 @@ name: Deploy to Contabo
 on:
   push:
     branches: [ main ]
-    paths-ignore:
-      - '.github/workflows/**'  # Ignore workflow file changes
-      - '**/*.md'  # Ignore documentation changes
 
 env:
   DOCKER_REPO: mrfuntor
