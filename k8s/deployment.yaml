@@ -26,7 +26,7 @@ spec:
         # The tag below is updated by your GitHub Action (sed command)
         image: mrfuntor/devops-bootcamp-linker-frontend-main-backend:${{git.sha}}
         ports:
-          - containerPort: 3000
+          - containerPort: 3001
         envFrom:
           - configMapRef:
               name: linker-app-config
@@ -40,20 +40,20 @@ spec:
         startupProbe:
           httpGet:
             path: /api/health
-            port: 3000
+            port: 3001
           failureThreshold: 30
           periodSeconds: 5
 
         livenessProbe:
           httpGet:
             path: /api/health
-            port: 3000
+            port: 3001
           initialDelaySeconds: 60
           periodSeconds: 10
 
         readinessProbe:
           httpGet:
             path: /api/health
-            port: 3000
+            port: 3001
           initialDelaySeconds: 30
           periodSeconds: 10
