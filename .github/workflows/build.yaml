@@ -72,4 +72,26 @@ jobs:
 
       - name: Verify Deployment
         run: |
-          kubectl rollout status deployment/web-app-deployment -n linker-app
+          kubectl rollout status deployment/web-app-deployment -n linker-app --timeout=120s
+
+      - name: Dump all cluster state
+        if: failure()
+        run: |
+          kubectl get all -n linker-app
+      - name: Debug failed deployment
+        if: failure()
+        run: |
+          echo "=== POD STATUS ==="
+          kubectl get pods -n linker-app -o wide
+
+          echo "=== SERVICES ==="
+          kubectl get svc -n linker-app
+
+          echo "=== DESCRIBE DEPLOYMENT ==="
+          kubectl describe deployment web-app-deployment -n linker-app
+
+          echo "=== POD EVENTS ==="
+          kubectl get events -n linker-app --sort-by=.metadata.creationTimestamp
+
+          echo "=== POD LOGS ==="
+          kubectl logs deployment/web-app-deployment -n linker-app --tail=200
