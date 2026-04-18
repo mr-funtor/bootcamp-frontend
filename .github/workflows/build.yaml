@@ -38,7 +38,7 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tags }}
           build-args: |
-            NEXT_PUBLIC_API_URL=http://api.charlesmonroe.online/api
+            NEXT_PUBLIC_API_URL=https://api.charlesmonroe.online/api
           cache-from: type=gha
           cache-to: type=gha,mode=max
     outputs:
