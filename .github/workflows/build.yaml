@@ -97,7 +97,3 @@ jobs:
       - name: Apply Argo CD Application
         run: |
           kubectl apply -n argocd -f argocd/app-definition.yaml
-
-      - name: Ensure app namespace exists
-        run: |
-          kubectl apply -f k8s/namespace.yaml
