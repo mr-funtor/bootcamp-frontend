@@ -10,6 +10,11 @@ const instrumentSans = Instrument_Sans({ weight: ["400", "500", "600", "700"], s
 export const metadata: Metadata = {
   title: "Dev Link",
   description: "We’re here to help you share your profiles with everyone!",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
