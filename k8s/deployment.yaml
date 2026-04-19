@@ -24,7 +24,7 @@ spec:
       containers:
         - name: app-container
           # The tag below is updated by your GitHub Action (sed command)
-          image: mrfuntor/devops-bootcamp-linker-frontend-main-frontend:sha-c81d74c
+          image: mrfuntor/devops-bootcamp-linker-frontend-main-frontend:sha-bc7f805
           ports:
             - containerPort: 3001
           envFrom:
