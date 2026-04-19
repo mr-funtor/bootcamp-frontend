@@ -101,9 +101,3 @@ jobs:
       - name: Ensure app namespace exists
         run: |
           kubectl apply -f k8s/namespace.yaml
-
-      - name: Apply ingress manifest
-        run: |
-          kubectl apply --dry-run=server -f k8s/argo-ingress.yaml
-          kubectl apply -f k8s/argo-ingress.yaml
-          kubectl get ingress -n argocd
