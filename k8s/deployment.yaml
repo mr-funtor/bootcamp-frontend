@@ -14,46 +14,44 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1       
-      maxUnavailable: 0 
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
         app: web-app
     spec:
       containers:
-      - name: app-container
-        # The tag below is updated by your GitHub Action (sed command)
-        image: mrfuntor/devops-bootcamp-linker-frontend-main-backend:${{git.sha}}
-        ports:
-          - containerPort: 3001
-        envFrom:
-          - configMapRef:
-              name: linker-app-config
-        resources:
-          limits:
-            cpu: "500m"
-            memory: "512Mi"
-          requests:
-            cpu: "250m"
-            memory: "256Mi"
-        startupProbe:
-          httpGet:
-            path: /api/check
-            port: 3001
-          failureThreshold: 30
-          periodSeconds: 5
-
-        livenessProbe:
-          httpGet:
-            path: /api/check
-            port: 3001
-          initialDelaySeconds: 60
-          periodSeconds: 10
-
-        readinessProbe:
-          httpGet:
-            path: /api/check
-            port: 3001
-          initialDelaySeconds: 30
-          periodSeconds: 10
+        - name: app-container
+          # The tag below is updated by your GitHub Action (sed command)
+          image: mrfuntor/devops-bootcamp-linker-frontend-main-frontend:sha-c81d74c
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - configMapRef:
+                name: linker-app-config
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+          startupProbe:
+            httpGet:
+              path: /api/check
+              port: 3001
+            failureThreshold: 30
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /api/check
+              port: 3001
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/check
+              port: 3001
+            initialDelaySeconds: 30
+            periodSeconds: 10
